@@ -1,0 +1,273 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Clean, Modern SaaS Telecalling CRM - White & Light Gray with Emerald Accent */
+    --background: 0 0% 100%;             /* Pure white #ffffff */
+    --background-secondary: 210 20% 98%; /* Light slate gray #f8fafc */
+    --card: 0 0% 100%;                    /* White card #ffffff */
+    --card-foreground: 222 47% 11%;      /* Deep slate #0f172a */
+    --foreground: 222 47% 11%;           /* Deep slate #0f172a */
+    --muted: 210 40% 96%;                /* Soft light gray #f1f5f9 */
+    --muted-foreground: 215 16% 47%;      /* Muted text #64748b */
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 165 71% 21%;              /* Premium Deep Emerald #0F5C4A */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 164 30% 95%;            /* Soft emerald tint #e6f4f0 */
+    --secondary-foreground: 165 71% 21%;
+    --accent: 165 50% 93%;               /* Subtle emerald accent #d8f3ec */
+    --accent-foreground: 165 71% 18%;
+    --cyan: 187 70% 45%;                 /* Secondary cyan accent */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 214 32% 91%;               /* Soft border #e2e8f0 */
+    --input: 214 32% 91%;                /* Input border #e2e8f0 */
+    --ring: 165 71% 21%;
+    --chart-1: 165 71% 21%;
+    --chart-2: 187 70% 45%;
+    --chart-3: 165 60% 40%;
+    --chart-4: 170 50% 35%;
+    --chart-5: 150 55% 30%;
+    --radius: 0.875rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "ss01", "cv01", "cv02";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+  ::selection {
+    background: hsl(var(--primary) / 0.15);
+    color: hsl(var(--primary));
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  /* Modern Glassmorphism & Light Shadows */
+  .glass {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+  }
+  .glass-strong {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(226, 232, 240, 0.9);
+  }
+  .glass-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    background: linear-gradient(135deg, hsl(165 71% 21%) 0%, hsl(165 80% 32%) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Emerald glow */
+  .glow-emerald {
+    box-shadow: 0 10px 30px -10px rgba(15, 92, 74, 0.25);
+  }
+  .glow-cyan {
+    box-shadow: 0 10px 30px -10px rgba(14, 165, 233, 0.2);
+  }
+
+  /* Noise texture overlay */
+  .noise-overlay {
+    position: relative;
+  }
+  .noise-overlay::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Grid background */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+  .bg-grid-fade {
+    mask-image: radial-gradient(ellipse 80% 50% at 50% 0%, black 40%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 50% at 50% 0%, black 40%, transparent 100%);
+  }
+
+  /* Mesh gradient */
+  .mesh-emerald {
+    background:
+      radial-gradient(ellipse 60% 50% at 20% 0%, hsl(165 71% 18% / 0.25), transparent 60%),
+      radial-gradient(ellipse 50% 40% at 80% 10%, hsl(187 70% 30% / 0.15), transparent 60%),
+      radial-gradient(ellipse 70% 60% at 50% 100%, hsl(165 71% 15% / 0.2), transparent 60%);
+  }
+
+  /* Custom cursor: hide native on desktop */
+  @media (hover: hover) and (pointer: fine) {
+    html.custom-cursor-active,
+    html.custom-cursor-active body,
+    html.custom-cursor-active * {
+      cursor: none !important;
+    }
+  }
+
+  /* Brief highlight for smooth scrolled sections */
+  @keyframes sectionHighlightGlow {
+    0% {
+      box-shadow: 0 0 0 0 rgba(15, 92, 74, 0.4);
+      outline: 2px solid rgba(15, 92, 74, 0.5);
+    }
+    50% {
+      box-shadow: 0 0 40px 12px rgba(15, 92, 74, 0.25);
+      outline: 2px solid rgba(15, 92, 74, 0.8);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(15, 92, 74, 0);
+      outline: 2px solid transparent;
+    }
+  }
+
+  .section-highlight {
+    animation: sectionHighlightGlow 1.8s ease-in-out forwards;
+    border-radius: 1.5rem;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary) / 0.4);
+    border-radius: 10px;
+    border: 2px solid hsl(var(--background));
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary) / 0.7);
+  }
+
+  /* Animated gradient border */
+  .border-gradient {
+    position: relative;
+    background: hsl(var(--card));
+    border-radius: var(--radius);
+  }
+  .border-gradient::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, hsl(165 71% 30% / 0.5), transparent 40%, hsl(187 70% 50% / 0.3));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .animate-marquee {
+    animation: marquee 40s linear infinite;
+  }
+  .animate-marquee-rev {
+    animation: marquee-rev 40s linear infinite;
+  }
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  .animate-float-slow {
+    animation: float 9s ease-in-out infinite;
+  }
+  .animate-pulse-glow {
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+  .animate-spin-slow {
+    animation: spin-slow 20s linear infinite;
+  }
+  .animate-gradient-x {
+    background-size: 200% 200%;
+    animation: gradient-x 8s ease infinite;
+  }
+  .animate-shimmer {
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+  .animate-scroll-dot {
+    animation: scroll-dot 2s ease-in-out infinite;
+  }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes marquee-rev {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes gradient-x {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes scroll-dot {
+  0% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(12px); opacity: 0.4; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+/* Preloader specific - rebuilt from Insane-PRELOADER, emerald color */
+.preloader-bar {
+  background: hsl(165 71% 30%);
+}
+.preloader-bar-2 {
+  background: hsl(165 71% 25%);
+}

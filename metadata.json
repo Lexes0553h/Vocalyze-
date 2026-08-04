@@ -1,0 +1,6 @@
+{
+  "name": "Vocalyze CRM",
+  "description": "Enterprise Telecalling & Sales Workspace",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Vocalyze CRM",
+  "short_name": "Vocalyze",
+  "description": "Enterprise Telecalling & Sales Pipeline CRM",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#090D16",
+  "theme_color": "#10B981",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
