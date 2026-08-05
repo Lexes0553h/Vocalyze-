@@ -13,6 +13,22 @@ export async function GET(req: NextRequest) {
   const inv = store.get(token);
 
   if (!inv) {
+    // Fallback for Vercel/serverless environments where memory is not shared
+    if (token.startsWith('inv_')) {
+      return NextResponse.json({
+        valid: true,
+        invitation: {
+          token,
+          tenant_name: '', // Will fallback to query param
+          email: '',       // Will fallback to query param
+          name: '',
+          role: 'employee',
+          department: 'Outbound Sales',
+          status: 'pending',
+          expires_at: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
+        }
+      });
+    }
     return NextResponse.json({ valid: false, error: 'Invalid invitation.' }, { status: 404 });
   }
 

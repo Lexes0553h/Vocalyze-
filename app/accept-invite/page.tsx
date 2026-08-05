@@ -95,6 +95,8 @@ function AcceptInviteContent() {
         token: tokenParam || 'inv_demo_123',
         name,
         password,
+        email: invitationData?.email,
+        tenantName: invitationData?.company,
       });
 
       if (res.error) {

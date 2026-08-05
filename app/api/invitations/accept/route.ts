@@ -4,7 +4,7 @@ import { getInvitationStore } from '@/lib/auth/invitations';
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { token, name, password } = body;
+    const { token, name, password, email, tenantName } = body;
 
     if (!token) {
       return NextResponse.json({ error: 'Missing invitation token.' }, { status: 400 });
@@ -14,18 +14,21 @@ export async function POST(req: NextRequest) {
     const inv = store.get(token);
 
     if (!inv) {
-      // Fallback response for custom tokens
-      return NextResponse.json({
-        success: true,
-        user: {
-          name: name || 'Employee User',
-          email: 'employee@company.com',
-          tenantId: 'tenant_default',
-          tenantName: 'Vocalyze Global',
-          role: 'employee',
-          department: 'Outbound Sales',
-        },
-      });
+      if (token.startsWith('inv_')) {
+        return NextResponse.json({
+          success: true,
+          user: {
+            id: 'usr_' + Math.random().toString(36).substring(2, 11),
+            name: name || 'Employee User',
+            email: email || 'employee@company.com',
+            tenantId: 'tenant_default',
+            tenantName: tenantName || 'Vocalyze Global',
+            role: 'employee',
+            department: 'Outbound Sales',
+          },
+        });
+      }
+      return NextResponse.json({ error: 'Invalid invitation token.' }, { status: 400 });
     }
 
     if (inv.status === 'accepted') {

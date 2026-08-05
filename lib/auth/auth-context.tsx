@@ -54,7 +54,7 @@ interface AuthContextValue {
   signIn: (email: string, password: string) => Promise<{ error: string | null }>;
   signUp: (name: string, email: string, password: string) => Promise<{ error: string | null }>;
   registerCompany: (data: CompanyRegistrationData) => Promise<{ error: string | null }>;
-  acceptInvite: (data: { token: string; name: string; password: string }) => Promise<{ error: string | null }>;
+  acceptInvite: (data: { token: string; name: string; password: string; email?: string; tenantName?: string; }) => Promise<{ error: string | null }>;
   signInWithGoogle: () => Promise<{ error: string | null }>;
   signInWithMicrosoft: () => Promise<{ error: string | null }>;
   signOut: () => Promise<void>;
@@ -344,7 +344,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const acceptInvite = async (data: { token: string; name: string; password: string }): Promise<{ error: string | null }> => {
+  const acceptInvite = async (data: { token: string; name: string; password: string; email?: string; tenantName?: string; }): Promise<{ error: string | null }> => {
     try {
       let email = 'employee@company.com';
       let tenantId = 'tenant_default';
